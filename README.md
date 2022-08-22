@@ -90,7 +90,6 @@ PATCH Request: Accept's Json.
 
 // The Invoice which needs to be updated it's date should not greater than the invoice date of previous or next invoice number.
 
-// Also NEW DATE should not be SAME AS in any invoices document present in the collection.
 
 #### 3=>  Delete a specific invoice based on invoice number
 

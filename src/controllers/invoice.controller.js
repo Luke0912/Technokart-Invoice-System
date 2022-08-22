@@ -73,26 +73,12 @@ const deleteInvoice = async (req, res) => {
 // Updates the invoices with the basic Validation involved at the time of invoice creation.
 // The Invoice which needs to be updated it's date should not
 // greater than the invoice date of previous or next
-// invoice number and
-// Also NEW DATE should not be SAME AS in any invoices document present in the collection.
-
+// invoice number
 
 const editInvoice = async (req, res) => {
   const { invoiceNumber } = req.params;
   try {
     let isValid = true;
-    let invoiceDate = await Invoice.findOne({
-      invoiceDate: new Date(req.body.invoiceDate),
-    });
-    if (invoiceDate) {
-      isValid = false;
-    }
-    if (!isValid) {
-      return res.status(httpStatus.BAD_REQUEST).send({
-        message:
-          'There Exist an Old Invoice with Same Date, Please Check and try Again',
-      });
-    }
     let previousInvoice = await Invoice.findOne({
       invoiceNumber: req.body.invoiceNumber - 1,
     });
@@ -134,7 +120,6 @@ const editInvoice = async (req, res) => {
 // and are Mandatory to get the results
 
 const findInvoices = async (req, res) => {
-  console.log(req.query);
   const { startDate, endDate } = req.query;
   try {
     if (startDate && endDate) {
