@@ -3,12 +3,14 @@ const router = express.Router();
 
 const {
   getInvoices,
+  createInvoice,
   deleteInvoice,
-  createInvoices,
+  editInvoice,
 } = require('../controllers/invoice.controller');
 
 router.get('/', getInvoices);
-router.post('/createInvoice', createInvoices);
+router.post('/createInvoice', createInvoice);
 router.delete('/deleteInvoice/:invoiceNumber', deleteInvoice);
+router.patch('/editInvoice/:invoiceNumber', editInvoice);
 
 module.exports = router;
