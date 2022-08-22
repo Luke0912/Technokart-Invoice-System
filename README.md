@@ -16,7 +16,7 @@ cd Technokart-Invoice-System
 code .
 ```
 
-## Paste .env file inside src folder or Create a .env File in src folder with PORT and your own Atlas Link for DB_URL
+## Paste .env file inside src folder or Create a .env File in src folder with "PORT" 8080 and your own Atlas Link for DB_URL
 
 ## Installation
 
