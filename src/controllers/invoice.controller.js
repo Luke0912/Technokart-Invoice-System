@@ -70,13 +70,11 @@ const deleteInvoice = async (req, res) => {
   }
 };
 
-
 // Updates the invoices with the basic Validation involved at the time of invoice creation.
 // The Invoice which needs to be updated it's date should not
 // greater than the invoice date of previous or next
-// invoice number and 
+// invoice number and
 // also it should not be as any invoices document present in the collection
-
 
 const editInvoice = async (req, res) => {
   const { invoiceNumber } = req.params;
@@ -130,6 +128,34 @@ const editInvoice = async (req, res) => {
   }
 };
 
-// Find the the invoices 
+// Find the the invoices between two dates Start
+// Both Start Date and End date should be in Query
+// and are Mandatory to get the results
 
-module.exports = { getInvoices, createInvoice, deleteInvoice, editInvoice };
+const findInvoices = async (req, res) => {
+  console.log(req.query);
+  const { startDate, endDate } = req.query;
+  try {
+    if (startDate && endDate) {
+      var invoices = await Invoice.find({
+        invoiceDate: {
+          $gte: new Date(startDate),
+          $lte: new Date(endDate),
+        },
+      });
+      res.status(httpStatus.OK).send(invoices);
+    } else {
+      throw new Error('Start Date / End Date Missing in Query');
+    }
+  } catch (err) {
+    return res.status(httpStatus.BAD_REQUEST).send({ message: err.message });
+  }
+};
+
+module.exports = {
+  getInvoices,
+  createInvoice,
+  deleteInvoice,
+  editInvoice,
+  findInvoices,
+};
