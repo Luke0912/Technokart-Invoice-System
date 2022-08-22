@@ -74,7 +74,8 @@ const deleteInvoice = async (req, res) => {
 // The Invoice which needs to be updated it's date should not
 // greater than the invoice date of previous or next
 // invoice number and
-// also it should not be as any invoices document present in the collection
+// Also NEW DATE should not be SAME AS in any invoices document present in the collection.
+
 
 const editInvoice = async (req, res) => {
   const { invoiceNumber } = req.params;
